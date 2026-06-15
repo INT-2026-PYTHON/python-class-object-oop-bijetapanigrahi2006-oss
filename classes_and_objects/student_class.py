@@ -79,3 +79,55 @@ Explanation:
 =================================================
 
 """
+from collections import Counter
+
+def find_words_in_grid(file_path, grid):
+    # Step 1: Flatten the grid and count the available frequency of each letter
+    flat_grid_chars = []
+    for row in grid:
+        for char in row:
+            flat_grid_chars.append(char.lower())
+            
+    grid_counts = Counter(flat_grid_chars)
+    matching_words = []
+    
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            for line in f:
+                word = line.strip()
+                if not word:
+                    continue
+                
+                # Step 2: Count the frequency of characters in the current word
+                word_lower = word.lower()
+                word_counts = Counter(word_lower)
+                
+                # Step 3: Verify if the grid can completely supply the word
+                can_form_word = True
+                for char, count in word_counts.items():from collections import Counter
+
+def find_words_in_grid(file_path, grid):
+    # Step 1: Flatten the grid and count the available frequency of each letter
+    flat_grid_chars = []
+    for row in grid:
+        for char in row:
+            flat_grid_chars.append(char.lower())
+            
+    grid_counts = Counter(flat_grid_chars)
+    matching_words = []
+    
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            for line in f:
+                word = line.strip()
+                if not word:
+                    continue
+                
+                # Step 2: Count the frequency of characters in the current word
+                word_lower = word.lower()
+                word_counts = Counter(word_lower)
+                
+                # Step 3: Verify if the grid can completely supply the word
+                can_form_word = True
+                for char, count in word_counts.items():
+                    # If a letter is missing or required more times than available
