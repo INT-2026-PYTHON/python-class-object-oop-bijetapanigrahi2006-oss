@@ -83,3 +83,49 @@ Explanation:
 =================================================
 
 """
+
+def find_words_from_letters(file_path, allowed_letters):
+    
+    allowed_set = set(allowed_letters.lower())
+    matching_words = []
+    
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            for line in f:
+                word = line.strip()
+                if not word:
+                    continue
+
+                word_set = set(word.lower())
+                
+                if word_set.issubset(allowed_set):
+                    matching_words.append(word)
+                    
+    except FileNotFoundError:
+        print(f"Error: The file at {file_path} was not found.")
+        return []
+
+    print(f"Words made entirely from '{allowed_letters}':")
+    print(matching_words)
+    return matching_words
+
+
+# --- Simulation / Driver Code ---
+_name_ = " "
+if _name_ == "_main_":
+  
+    sample_filename = "sowpods.txt"
+    sample_words = [
+        "apple",
+        "pool",
+        "loop",
+        "pop",
+        "polo",
+        "banana"
+    ]
+    
+    with open(sample_filename, "w", encoding="utf-8") as f:
+        f.write("\n".join(sample_words))
+        
+    # Execute the function searching for words made only from letters in "orlop"
+    find_words_from_letters(sample_filename, "orlop")

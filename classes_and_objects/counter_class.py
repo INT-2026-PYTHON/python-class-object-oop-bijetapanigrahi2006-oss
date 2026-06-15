@@ -89,3 +89,50 @@ Explanation:
 =================================================
 
 """
+def find_single_vowel_words(file_path):
+    # Define the set of recognized standard vowels
+    vowels_set = {'a', 'e', 'i', 'o', 'u'}
+    matching_words = []
+    
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            for line in f:
+                word = line.strip()
+                if not word:
+                    continue
+                
+                # Extract all unique vowels present in the current word
+                word_vowels = set(word.lower()) & vowels_set
+                
+                # The word is a match if it contains exactly ONE unique vowel type
+                if len(word_vowels) == 1:
+                    matching_words.append(word)
+                    
+    except FileNotFoundError:
+        print(f"Error: The file at {file_path} was not found.")
+        return []
+
+    # Print results matching the assignment requirements
+    print("Words containing exactly one unique vowel:")
+    print(matching_words)
+    return matching_words
+
+
+# --- Simulation / Driver Code ---
+_name_ = " "
+if _name_ == "_main_":
+    # Create a temporary file to replicate your example context
+    sample_filename = "sowpods.txt"
+    sample_words = [
+        "apple",    # Vowels: 'a', 'e' (2 unique) -> Skip
+        "banana",   # Vowels: 'a' only (1 unique)  -> Match
+        "cherry",   # Vowels: 'e' only (1 unique)  -> Match
+        "cool",     # Vowels: 'o' only (1 unique)  -> Match
+        "education" # Vowels: 'a', 'e', 'i', 'o', 'u' -> Skip
+    ]
+    
+    with open(sample_filename, "w", encoding="utf-8") as f:
+        f.write("\n".join(sample_words))
+        
+    # Run the function on the sample file
+    find_single_vowel_words(sample_filename)
